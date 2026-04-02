@@ -4,17 +4,12 @@
 // ============================================================
 
 const dotenv = require('dotenv');
-const envResult = dotenv.config();
-
-if (envResult.error) {
-  console.error('❌ Failed to load .env file');
-  process.exit(1);
-}
+dotenv.config();
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 if (!GROQ_API_KEY || GROQ_API_KEY.trim() === '') {
-  console.error('❌ GROQ_API_KEY is missing or empty in .env');
+  console.error('❌ GROQ_API_KEY is missing or empty.');
   process.exit(1);
 }
 
