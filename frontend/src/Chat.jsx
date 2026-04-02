@@ -96,6 +96,10 @@ function Chat() {
                 />
                 <button type="submit" disabled={isLoading || !input.trim()}>Send</button>
             </form>
+
+            <div style={{ fontSize: '10px', color: '#ccc', textAlign: 'center', padding: '5px' }}>
+                System: Connected to {import.meta.env.VITE_API_URL || 'Localhost (Check Vercel Settings)'}
+            </div>
         </div>
     );
 }
