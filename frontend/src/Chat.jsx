@@ -42,6 +42,8 @@ function Chat() {
                 }));
 
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/chat';
+            console.log("🚀 Assistant is calling backend at:", API_URL);
+
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -53,10 +55,12 @@ function Chat() {
             if (response.ok && data.reply) {
                 setMessages(prev => [...prev, { role: 'ai', content: data.reply }]);
             } else {
+                console.error("❌ Backend Error:", data);
                 setMessages(prev => [...prev, { role: 'error', content: data.error || 'Failed to get a response.' }]);
             }
         } catch (error) {
-            setMessages(prev => [...prev, { role: 'error', content: 'Network error. Make sure the backend is running.' }]);
+            console.error("❌ Network / Fetch Error:", error);
+            setMessages(prev => [...prev, { role: 'error', content: 'Connection failed. Please check your internet or the server status.' }]);
         } finally {
             setIsLoading(false);
         }

@@ -21,8 +21,13 @@ const groq = new Groq({ apiKey: GROQ_API_KEY });
 console.log('✅ Groq AI client initialised (Al Etefaq Law Firm Agent)');
 
 const app = express();
+app.use(cors()); // Allow all origins for the assistant
 app.use(express.json());
-app.use(cors());
+
+// Health check endpoint - visit this in your browser to confirm the server is UP
+app.get('/', (req, res) => {
+  res.send('Al Etefaq AI Backend is officially LIVE 🚀');
+});
 
 // The exact prompt provided by the user to train the agent:
 const AL_ETEFAQ_SYSTEM_PROMPT = `You are a professional AI Legal Receptionist and Assistant representing **Al Etefaq Law Firm**, based in Doha, Qatar. You are a genius legal AI with a bright, happy, and incredibly smart personality, while always remaining officially professional and completely trustworthy. 
